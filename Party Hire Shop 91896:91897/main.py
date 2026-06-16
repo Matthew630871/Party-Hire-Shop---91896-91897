@@ -1,6 +1,8 @@
-import tkinter 
+import tkinter as tk
+from tkinter import ttk
 
 # Data lists
+#Cus_name=[]
 
 
 
@@ -24,28 +26,48 @@ import tkinter
 
 
 
-# ---------------------------- Define TKinter GUI ---------------------------- 
+# ---------------------------- TKinter GUI ---------------------------- 
 
 
-# ----- Add app Name label ------ 
+# ----- Define Tkinter GUI ------ 
+root = tk.Tk()
+root.title("TO BE DECIDED")
+root.geometry("300x400")
 
+# ----- App Name label ------ 
+title = ttk.Label(root, text="TO BE DECIDED")
  
-# ----- Add Customer label and entry box -----  
+# ----- Customer label and entry box -----  
+ttk.Label(root, text="Blank").grid(row=1, column=0,)
+name_entry = ttk.Entry(root, width=25)
+name_entry.grid(row=1, column=1)
 
+# ----- Receipt label and entry box -----  
+ttk.Label(root, text="Blank").grid(row=2, column=0,)
+receipt_entry = ttk.Entry(root, width=25)
+receipt_entry.grid(row=2, column=1)
 
-# ----- Add Receipt label and entry box -----  
+# ----- Item hired label and dropdown box -----  
+ttk.Label(root, text="Blank").grid(row=3, column=0,)
+hired = ttk.Combobox(root, values=["Blank 1","Blank 2","Blank 3"], state="read only")
+hired.grid(row=3, column=1)
+# ----- Number Hired label and entry box -----  
+ttk.Label(root, text="Blank").grid(row=2, column=0,)
+hired_num = ttk.Entry(root, width=25)
+hired_num.grid(row=2, column=1)
 
+# ----- Sumbit Button -----  
+sub_btn = ttk.Button(root, text="Submit") #Add submit command here
+sub_btn.grid(row=4, colunm=2)
 
-# ----- Add Item hired label and dropdown box -----  
+# ----- Return items label -----  
+ttk.Label(root, text="Blank").grid(row=5, columnspan=2)
 
+# ----- Customer name label and dropdown box ----- 
+ttk.Label(root, text="BLank").grid(row=6, column=0) 
+name = ttk.Combobox(root, values=["Blank","Blank","Blank"])
+name.grid(row=6, column=1)
 
-# ----- Add Number Hired label and entry box -----  
+# ----- Return button ----- 
 
-
-# ----- Add Sumbit Button -----  
-
-
-# ----- Add Return items label -----  
-
-
-# ----- Add Customer name label and entry box -----  
+root.mainloop()

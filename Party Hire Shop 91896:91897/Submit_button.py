@@ -1,22 +1,28 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+
 # Data lists
-Customer_name=[]
+customer_names=[]
 
 
 # Helper Functions
 
-def receipt_num(num):
+def Submit():
+    first_name = first_name_entry.get().strip()
+    last_name = last_name_entry.get().strip()
 
-    try:
-        new_num = int(num)
-    except ValueError:
-        messagebox.showerror("Error", "Please enter a integer.")
+    if not first_name or not last_name:
+        messagebox.showwarning("Input Error", "Both First Name and Last Name are required!")
+    else:
+        # Saving the first and last name as one
+        full_name = f"{first_name} {last_name}"
+        customer_names.append([full_name])
 
+    first_name_entry.delete(0, tk.END)
+    last_name_entry.delete(0, tk.END)
 
-
-
+    print(customer_names)
 
 
 
@@ -72,7 +78,7 @@ hired_num = ttk.Entry(root, width=25)
 hired_num.grid(row=4, column=1)
 
 # ----- Sumbit Button -----  
-sub_btn = ttk.Button(root, text="Submit") #Add submit command here
+sub_btn = ttk.Button(root, text="Submit", command=Submit) #Add submit command here
 sub_btn.grid(row=5, column=1)
 
 # ----- Return items label -----  

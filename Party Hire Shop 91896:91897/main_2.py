@@ -1,18 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
+
 # Data lists
 Customer_name=[]
 
 
 # Helper Functions
 
-def receipt_num(num):
 
-    try:
-        new_num = int(num)
-    except ValueError:
-        messagebox.showerror("Error", "Please enter a integer.")
+
 
 
 

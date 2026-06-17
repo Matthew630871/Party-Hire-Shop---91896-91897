@@ -22,8 +22,7 @@ def Submit():
     first_name_entry.delete(0, tk.END)
     last_name_entry.delete(0, tk.END)
 
-    print(customer_names)
-
+    print(customer_names) # for testing
 
 
 

@@ -2,16 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 
 # Data lists
-Customer_name=[]
+customer_names=[]
 
 
 # Helper Functions
-
-
-
-
-
-
 
 
 

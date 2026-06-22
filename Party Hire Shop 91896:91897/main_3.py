@@ -1,18 +1,36 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-# Data lists
-Customer_name=[]
 
+# Data lists
+customer_names=[]
+receipt_numbers=[]
 
 # Helper Functions
 
-def receipt_num(num):
+def Submit():
+    first_name = first_name_entry.get().strip()
+    last_name = last_name_entry.get().strip()
+    receipt = receipt_entry.get()
+
+    if not first_name or not last_name:
+        messagebox.showwarning("Input Error", "Both First Name and Last Name are required!")
+    else:
+        # Saving the first and last name as one
+        full_name = f"{first_name} {last_name}"
+        customer_names.append([full_name])
+        print(customer_names) # for testing
+
+    first_name_entry.delete(0, tk.END)
+    last_name_entry.delete(0, tk.END)
+    receipt_entry.delete(0, tk.END)
 
     try:
-        new_num = int(num)
+        new_num = int(receipt)
+        print (new_num)
     except ValueError:
-        messagebox.showerror("Error", "Please enter a integer.")
+        messagebox.showerror("Error", "Receipt number must be integer.")
+    return False
 
 
 
@@ -21,8 +39,7 @@ def receipt_num(num):
 
 
 
-
-
+   
 
 
 
@@ -73,7 +90,7 @@ hired_num = ttk.Entry(root, width=25)
 hired_num.grid(row=4, column=1)
 
 # ----- Sumbit Button -----  
-sub_btn = ttk.Button(root, text="Submit") #Add submit command here
+sub_btn = ttk.Button(root, text="Submit", command=Submit) #Add submit command here
 sub_btn.grid(row=5, column=1)
 
 # ----- Return items label -----  
@@ -82,7 +99,7 @@ title_label.grid(row=6, columnspan=2, padx=5, pady=5)
 
 # ----- Customer name label and dropdown box ----- 
 ttk.Label(root, text="Customer name").grid(row=7, column=0) 
-name = ttk.Combobox(root, values=["Name 1","Name 2","Name 3"])
+name = ttk.Combobox(root, values=customer_names)
 name.grid(row=7, column=1)
 
 # ----- Return button ----- 

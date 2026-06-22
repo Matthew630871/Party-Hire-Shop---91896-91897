@@ -86,7 +86,7 @@ title_label.grid(row=6, columnspan=2, padx=5, pady=5)
 
 # ----- Customer name label and dropdown box ----- 
 ttk.Label(root, text="Customer name").grid(row=7, column=0) 
-name = ttk.Combobox(root, values=["Name 1","Name 2","Name 3"])
+name = ttk.Combobox(root, values=customer_names)
 name.grid(row=7, column=1)
 
 # ----- Return button ----- 

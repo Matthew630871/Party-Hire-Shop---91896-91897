@@ -56,13 +56,17 @@ def Submit():
     except ValueError:
         messagebox.showerror("Error", "Amount hired must be a whole number.")
         return
-
+    
     # 5. If it passes all checks, save the data
     full_name = f"{first_name} {last_name}"
+
     customer_names.append(full_name)
     receipt_numbers.append(new_num)
     items_hired.append(item)
     amount_hired.append(new_amount)
+
+    # Code for updating the customer return combobox
+    return_name_combo['values'] = customer_names
 
     # Printing out for testing
     print(f"Saved entry: {full_name}, Receipt: {new_num}, Item: {item}, Qty: {new_amount}")
@@ -73,12 +77,6 @@ def Submit():
     receipt_entry.delete(0, tk.END)
     hired.set('')
     hired_num.delete(0, tk.END)
-
-
-
-
-
-
 
 
 # ---------------------------- TKinter GUI ---------------------------- 
@@ -114,8 +112,8 @@ receipt_entry = ttk.Entry(root, width=25)
 receipt_entry.grid(row=2, column=1)
 
 # ----- Item hired label and dropdown box -----  
-ttk.Label(root, text="Item Hired").grid(row=3, column=0,)
-hired = ttk.Combobox(root, values=hireable_items, state="read only")
+ttk.Label(root, text="Item Hired").grid(row=3, column=0)
+hired = ttk.Combobox(root, values=hireable_items, state="readonly")
 hired.grid(row=3, column=1)
 
 # ----- Number Hired label and entry box -----  
@@ -133,11 +131,11 @@ title_label.grid(row=6, columnspan=2, padx=5, pady=5)
 
 # ----- Customer name label and dropdown box ----- 
 ttk.Label(root, text="Customer name").grid(row=7, column=0) 
-name = ttk.Combobox(root, values=customer_names)
-name.grid(row=7, column=1)
+return_name_combo = ttk.Combobox(root, values=customer_names, state="readonly")
+return_name_combo.grid(row=7, column=1)
 
 # ----- Return button ----- 
 sub_btn = ttk.Button(root, text="Return") #Add Return command here
-sub_btn.grid(row=8, column=1)
+sub_btn.grid(row=8, column=1,)
 
 root.mainloop()

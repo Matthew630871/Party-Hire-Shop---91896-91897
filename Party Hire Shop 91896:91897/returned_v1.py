@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 
 #Program constants
+FILE_NAME = "hire_records.txt"
 hireable_items= ["Blank_1","Blank_2","Blank_3"]
 Hired_cap = 500
 # Data lists
@@ -65,13 +66,18 @@ def Submit():
     items_hired.append(item)
     amount_hired.append(new_amount)
 
+    #6. Saving to a .txt
+    with open(FILE_NAME, "a") as file:
+        file.write(f"{full_name}, Receipt: {new_num}, Item: {item}, Qty: {new_amount}, Status: hired\n")
+
     # Code for updating the customer return combobox
     return_name_combo['values'] = customer_names
 
     # Printing out for testing
     print(f"Saved entry: {full_name}, Receipt: {new_num}, Item: {item}, Qty: {new_amount}")
+    messagebox.showinfo("Success", f"Hire record saved successfully for {full_name}")
     
-    # 6. clearing boxes after a seccessful save 
+    # 7. clearing boxes after a seccessful save 
     first_name_entry.delete(0, tk.END)
     last_name_entry.delete(0, tk.END)
     receipt_entry.delete(0, tk.END)

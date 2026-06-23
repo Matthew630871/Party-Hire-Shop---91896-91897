@@ -13,33 +13,36 @@ def Submit():
     last_name = last_name_entry.get().strip()
     receipt = receipt_entry.get().strip()
 
+    # Checking if names are missing
     if not first_name or not last_name:
         messagebox.showwarning("Input Error", "Both First Name and Last Name are required!")
-    else:
-        # Saving the first and last name as one
-        full_name = f"{first_name} {last_name}"
-        customer_names.append([full_name])
-        print(customer_names) # for testing
+        return
+    
+    # Checking if the receipt number is missing or not an integer
+    if not receipt:
+        messagebox.showwarning("Input Error", "Receipt Number is required")
+        return
+    
+    try:
+        new_num = int(receipt)
+    except ValueError:
+        messagebox.showerror("Error", "Receipt number must be an integer.")
+        return
 
+    # If it passes all checks, save the data
+    full_name = f"{first_name}{last_name}"
+    customer_names.append(full_name)
+    receipt_numbers.append(new_num)
+
+    print(customer_names) # for testing
+    print(receipt_numbers)# for testing
+
+    # clearing boxes after a seccessful save 
     first_name_entry.delete(0, tk.END)
     last_name_entry.delete(0, tk.END)
     receipt_entry.delete(0, tk.END)
 
-    try:
-        new_num = int(receipt)
-        print (new_num)
-    except ValueError:
-        messagebox.showerror("Error", "Receipt number must be integer.")
-    return False
 
-
-
-
-
-
-
-
-   
 
 
 

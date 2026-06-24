@@ -91,17 +91,21 @@ def returnitem():
     if not selected_customer:
         messagebox.showwarning("Selection Error", "Please select a customer")
         return
+    
+    if not os.path.exists(FILE_NAME):
+        messagebox.showerror("File Error", "No hire records file found")
+        return
         
     #1. Reading the file
     with open(FILE_NAME, "r") as file:
         file_content = file.read()
 
-    # defining what we are looking for
     target_hire = f"{selected_customer}"
+    active_hire_marker = ", Status: hired"
     
     # Checking if the customer is recorded 
-    if target_hire in file_content and ",Status: hired" in file_content:
-        updated_content = file_content.replace(",Status:hired", ", Status:returned")
+    if target_hire in file_content and active_hire_marker in file_content:
+        updated_content = file_content.replace(active_hire_marker, ", Status:returned")
 
         with open(FILE_NAME, "w") as file:
             file.write(updated_content)

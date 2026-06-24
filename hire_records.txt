@@ -1,1 +1,5 @@
-Matthew Mcleod, Receipt: 1234567890, Item: Blank_2, Qty: 43, Status: hired
+Matthew Mcleod, Receipt: 1234567890, Item: Blank_2, Qty: 43, Status:returned
+Matthew Mcleod, Receipt: 1234567890, Item: Blank_2, Qty: 32, Status:returned
+Matthew Mcleod, Receipt: 0, Item: Blank_2, Qty: 43, Status: hired
+Matthew Mcleod, Receipt: 0, Item: Blank_2, Qty: 32, Status: hired
+Matthew Mcleod, Receipt: -1, Item: Blank_3, Qty: 32, Status: hired

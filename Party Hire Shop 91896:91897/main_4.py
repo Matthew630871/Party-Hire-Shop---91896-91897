@@ -30,16 +30,16 @@ def Submit():
     if not receipt:
         messagebox.showwarning("Input Error", "Receipt Number is required")
         return
-        if receipt == 0:
-            messagebox.showerror("Error", "Amount hired must be greater than 0.")
-            return
+
     
     try:
         new_num = int(receipt)
     except ValueError:
         messagebox.showerror("Error", "Receipt number must be an integer.")
         return
-    
+    if new_num <= 0:
+        messagebox.showerror("Error", "Receipt Number must be greater than 0.")
+        return
 
     # 3. Checking if a item was selected from dropdown
     if not item:
@@ -88,6 +88,36 @@ def Submit():
     hired.set('')
     hired_num.delete(0, tk.END)
 
+def returnitem():
+    #Getting the selected customer from the return dropdown
+    selected_customer = return_name_combo.get()
+
+    if not selected_customer:
+        messagebox.showwarning("Selection Error", "Please select a customer")
+        return
+    
+    if not os.path.exists(FILE_NAME):
+        messagebox.showerror("File Error", "No hire records file found")
+        return
+        
+    #1. Reading the file
+    with open(FILE_NAME, "r") as file:
+        file_content = file.read()
+
+    target_hire = f"{selected_customer}"
+    active_hire_marker = ", Status: hired"
+    
+    # Checking if the customer is recorded 
+    if target_hire in file_content and active_hire_marker in file_content:
+        updated_content = file_content.replace(active_hire_marker, ", Status:returned")
+
+        with open(FILE_NAME, "w") as file:
+            file.write(updated_content)
+
+        messagebox.showinfo("Success", f"items marked as 'returned' for {selected_customer}")
+        return_name_combo.set('') 
+    else:
+        messagebox.showinfo("Info",f"No active hired items found for {selected_customer}")
 
 
 # ---------------------------- TKinter GUI ---------------------------- 

@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-import os
 
 #Program constants
 FILE_NAME = "hire_records.txt"
@@ -31,11 +30,16 @@ def Submit():
     if not receipt:
         messagebox.showwarning("Input Error", "Receipt Number is required")
         return
+        if receipt == 0:
+            messagebox.showerror("Error", "Amount hired must be greater than 0.")
+            return
+    
     try:
         new_num = int(receipt)
     except ValueError:
         messagebox.showerror("Error", "Receipt number must be an integer.")
         return
+    
 
     # 3. Checking if a item was selected from dropdown
     if not item:
@@ -83,34 +87,6 @@ def Submit():
     receipt_entry.delete(0, tk.END)
     hired.set('')
     hired_num.delete(0, tk.END)
-
-def returnitem():
-    #Getting the selected customer from the return dropdown
-    selected_customer = return_name_combo.get()
-
-    if not selected_customer:
-        messagebox.showwarning("Selection Error", "Please select a customer")
-        return
-        
-    #1. Reading the file
-    with open(FILE_NAME, "r") as file:
-        file_content = file.read()
-
-    # defining what we are looking for
-    target_hire = f"{selected_customer}"
-    
-    # Checking if the customer is recorded 
-    if target_hire in file_content and ",Status: hired" in file_content:
-        updated_content = file_content.replace(",Status:hired", ", Status:returned")
-
-        with open(FILE_NAME, "w") as file:
-            file.write(updated_content)
-
-        messagebox.showinfo("Success", f"items marked as 'returned' for {selected_customer}")
-        return_name_combo.set('') 
-    else:
-        messagebox.showinfo("Info",f"No active hired items found for {selected_customer}")
-
 
 
 
@@ -170,7 +146,7 @@ return_name_combo = ttk.Combobox(root, values=customer_names, state="readonly")
 return_name_combo.grid(row=7, column=1)
 
 # ----- Return button ----- 
-sub_btn = ttk.Button(root, text="Return",command=returnitem) #Add Return command here
+sub_btn = ttk.Button(root, text="Return") #Add Return command here
 sub_btn.grid(row=8, column=1,)
 
 root.mainloop()

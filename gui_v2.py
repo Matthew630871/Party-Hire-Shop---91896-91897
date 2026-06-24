@@ -1,7 +1,7 @@
+import os
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-import os
 
 #Program constants
 FILE_NAME = "hire_records.txt"
@@ -126,58 +126,57 @@ def returnitem():
 # ----- Define Tkinter GUI ------ 
 root = tk.Tk()
 root.title("Julies Hire system")
-root.geometry("380x290")
+root.geometry("460x560")
 
-# ----- App Name label ------ 
-title = ttk.Label(root, text="Julies Hire system")
+# Colouring
+BG_COLOUR = "#D0E1F9"
+root.configure(bg=BG_COLOUR)
  
 # ----- App Title ------ 
-title_label = ttk.Label(root, text="Julies Hire system", font=("Arial", 20, "bold"))
-title_label.grid(row=0, columnspan=3, padx=10, pady=15)
+title_label = tk.Label(root, text="Julies Hire system", font=("Arial", 12, "bold"), bg="white", fg="black", bd=1, relief="solid", height=2)
+title_label.grid(row=0, columnspan=3, padx=30, pady=(20, 15), sticky="ew")
 
 # ----- Customer label and entry box -----  
-ttk.Label(root, text="Customer Full Name").grid(row=1, column=0, padx=5, pady=5, sticky="e")
-
-# Frame to hold both name entries in the same grid cell
-name_frame = ttk.Frame(root)
-name_frame.grid(row=1, column=1, columnspan=2, sticky="w", padx=5)
-
-first_name_entry = ttk.Entry(name_frame, width=10)
-first_name_entry.pack(side="left", padx=(0, 5)) 
-
-last_name_entry = ttk.Entry(name_frame, width=10)
-last_name_entry.pack(side="left")
+tk.Label(root, text="Customer Full Name", font=("Arial", 11), bg=BG_COLOUR).grid(row=1, column=0, padx=(20, 10), pady=8, sticky="w")
+first_name_entry = tk.Entry(root, width=12)
+first_name_entry.grid(row=1, column=1, pady=8, sticky="w")
+last_name_entry = tk.Entry(root, width=12)
+last_name_entry.grid(row=1, column=2, padx=(0, 20), sticky="w")
 
 # ----- Receipt label and entry box -----  
-ttk.Label(root, text="Receipt Number").grid(row=2, column=0,)
-receipt_entry = ttk.Entry(root, width=25)
-receipt_entry.grid(row=2, column=1)
+tk.Label(root, text="Receipt Number", font=("Arial", 11), bg=BG_COLOUR).grid(row=2, column=0, padx=(20, 10), pady=8, sticky="w")
+receipt_entry = tk.Entry(root, width=27)
+receipt_entry.grid(row=2, column=1, columnspan=2, pady=8, sticky="w")
 
 # ----- Item hired label and dropdown box -----  
-ttk.Label(root, text="Item Hired").grid(row=3, column=0)
-hired = ttk.Combobox(root, values=hireable_items, state="readonly")
-hired.grid(row=3, column=1)
+tk.Label(root, text="Item Hired", font=("Arial", 11), bg=BG_COLOUR).grid(row=3, column=0, padx=(20, 10), pady=8, sticky="w")
+hired = ttk.Combobox(root, values=hireable_items, state="readonly", width=25)
+hired.grid(row=3, column=1, columnspan=2, pady=8, sticky="w")
 
-# ----- Number Hired label and entry box -----  
-ttk.Label(root, text="Amount Hired").grid(row=4, column=0)
-hired_num = ttk.Entry(root, width=25)
-hired_num.grid(row=4, column=1)
+# ----- Number Hired label and entry box -----  $
+tk.Label(root, text="Amount Hired", font=("Arial", 11), bg=BG_COLOUR).grid(row=4, column=0, padx=(20, 10), pady=8, sticky="w")
+hired_num = tk.Entry(root, width=27)
+hired_num.grid(row=4, column=1, columnspan=2, pady=8, sticky="w")
 
-# ----- Sumbit Button -----  
-sub_btn = ttk.Button(root, text="Submit", command=Submit) #Add submit command here
-sub_btn.grid(row=5, column=1)
+# ----- Submit Button -----  
+sub_btn = tk.Button(root, text="Submit", font=("Arial", 11, "bold"), bg="#92C47D", fg="black", width=20, command=Submit)
+sub_btn.grid(row=5, column=0, columnspan=3, pady=15)
 
 # ----- Return items label -----  
-title_label = ttk.Label(root, text="Return items here", font=("Arial", 14, "bold"))
-title_label.grid(row=6, columnspan=2, padx=5, pady=5)
+return_title_label = tk.Label(root, text="Return items here", font=("Arial", 12, "bold"), bg="white", fg="black", bd=1, relief="solid", height=2)
+return_title_label.grid(row=6,column=0, columnspan=3, padx=20, pady=15, sticky="ew")
 
 # ----- Customer name label and dropdown box ----- 
-ttk.Label(root, text="Customer name").grid(row=7, column=0) 
-return_name_combo = ttk.Combobox(root, values=customer_names, state="readonly")
-return_name_combo.grid(row=7, column=1)
+tk.Label(root, text="Customer name", font=("Arial", 11), bg=BG_COLOUR).grid(row=7, column=0, padx=(20, 10), pady=8, sticky="w") 
+return_name_combo = ttk.Combobox(root, values=customer_names, state="readonly", width=25)
+return_name_combo.grid(row=7, column=1, columnspan=2, pady=8, sticky="w")
 
 # ----- Return button ----- 
-sub_btn = ttk.Button(root, text="Return") #Add Return command here
-sub_btn.grid(row=8, column=1,)
+return_btn = tk.Button(root, text="Return", font=("Arial", 11, "bold"), bg="#92C47D", fg="black", width=20, command=returnitem) #Add Return command here
+return_btn.grid(row=8, column=0, columnspan=3, pady=15)
+
+root.columnconfigure(0, weight=1)
+root.columnconfigure(1, weight=1)
+root.columnconfigure(2, weight=1)
 
 root.mainloop()

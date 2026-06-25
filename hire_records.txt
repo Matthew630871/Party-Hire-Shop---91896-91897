@@ -1,0 +1,4 @@
+=== Julie's Hire System Records (2026-06-26 ===
+)Customer Name        | Item Hired      | Amount   | Receipt   
+-----------------------------------------------------------
+Matthew Mcleod | Plastic Chair   | 3        | 987654321 

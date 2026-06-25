@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from datetime import datetime
 
 #Program constants
 FILE_NAME = "hire_records.txt"
@@ -71,16 +72,22 @@ def submit():
     items_hired.append(item)
     amount_hired.append(new_amount)
 
+    file_exists = os.path.exists(FILE_NAME) and os.path.getsize(FILE_NAME) > 0
+
     # 6. Saving to a .txt
     with open(FILE_NAME, "a") as file:
-        file.write(f"{full_name}, Receipt: {new_num}, Item: {item}, Qty: {new_amount}, Status: hired\n")
+        if not file_exists:
+            current_date = datetime.now().strftime("%Y-%m-%d")
+            file.write(f"=== Julie's Hire System Records ({current_date} ===\n)")
+            header = f"{'Customer Name':<20} | {'Item Hired':<15} | {'Amount':<8} | {'Receipt':<10}\n" # Learnt on W3schools
+            file.write(header)
+            file.write("-" * len(header.strip())+ "\n")
+
+            row = f"{full_name:<20} | {item:<15} | {new_amount:<8} | {new_num:<10}\n"
+            file.write(row)
 
     # Code for updating the customer return combobox
     return_name_combo['values'] = customer_names
-
-    # Printing out for testing
-    print(f"Saved entry: {full_name}, Receipt: {new_num}, Item: {item}, Qty: {new_amount}")
-    messagebox.showinfo("Success", f"Hire record saved successfully for {full_name}")
 
     # 7. clearing boxes after a seccessful save
     first_name_entry.delete(0, tk.END)
@@ -103,16 +110,14 @@ def returnitem():
     if selected_customer in customer_names: 
        
        index = customer_names.index(selected_customer)
-
        customer_names.pop(index)
        receipt_numbers.pop(index)
        items_hired.pop(index)
        amount_hired.pop(index)
-
-       return_name_combo['values'] = customer_names
     else:
         messagebox.showinfo("Info", f"No active hire record found for {selected_customer}")
         return
+    
     with open(FILE_NAME, "r") as file:
         lines = file.readlines()
     
@@ -123,14 +128,14 @@ def returnitem():
         if selected_customer in line and not record_deleted:
             record_deleted = True
             continue
-        
         updated_lines.append(line)
+
     with open(FILE_NAME, "w") as file:
         file.writelines(updated_lines)
     
     messagebox.showinfo("Success", f"All item successfully returned. Record for {selected_customer} has been deleted.")
     return_name_combo.set('')
-    
+
 # ---------------------------- TKinter GUI ----------------------------
 
 # ----- Define Tkinter GUI ------

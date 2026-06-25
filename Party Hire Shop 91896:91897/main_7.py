@@ -90,42 +90,47 @@ def submit():
     hired_num.delete(0, tk.END)
 
 def returnitem():
-    """ Return button. Taking the usersname then appending "Returned" """
-    # Getting the selected customer from the return dropdown
     selected_customer = return_name_combo.get()
 
     if not selected_customer:
-        messagebox.showwarning("Selection Error", "Please select a customer")
+        messagebox.showerror("Selection Error", "Please select a customer")
         return
-
+   
     if not os.path.exists(FILE_NAME):
         messagebox.showerror("File Error", "No hire records file found")
         return
-    
 
-    # 1. Reading the file
-    with open(FILE_NAME, "r") as file:
-        file_content = file.read()
+    if selected_customer in customer_names: 
+       
+       index = customer_names.index(selected_customer)
 
-    target_hire = f"{selected_customer}"
-    active_hire_marker = ", Status: hired"
+       customer_names.pop(index)
+       receipt_numbers.pop(index)
+       items_hired.pop(index)
+       amount_hired.pop(index)
 
-    # Checking if the customer is recorded 
-    if target_hire in file_content and active_hire_marker in file_content:
-        updated_content = file_content.replace(active_hire_marker, ", Status:returned")
-
-        with open(FILE_NAME, "w") as file:
-            file.write(updated_content)
-
-        messagebox.showinfo("Success", f"items marked as 'returned' for {selected_customer}")
-        return_name_combo.set('')
-    # Code to remove Customer name from customer_names list
-    
+       return_name_combo['values'] = customer_names
     else:
-        messagebox.showinfo("Info", f"No active hired items found for {selected_customer}")
+        messagebox.showinfo("Info", f"No active hire record found for {selected_customer}")
+        return
+    with open(FILE_NAME, "r") as file:
+        lines = file.readlines()
+    
+    updated_lines = []
+    record_deleted = False
 
-
-
+    for line in lines:
+        if selected_customer in line and not record_deleted:
+            record_deleted = True
+            continue
+        
+        updated_lines.append(line)
+    with open(FILE_NAME, "w") as file:
+        file.writelines(updated_lines)
+    
+    messagebox.showinfo("Success", f"All item successfully returned. Record for {selected_customer} has been deleted.")
+    return_name_combo.set('')
+    
 # ---------------------------- TKinter GUI ----------------------------
 
 # ----- Define Tkinter GUI ------

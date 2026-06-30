@@ -1,4 +1,4 @@
-=== Julie's Hire System Records (2026-06-26 ===
-)Customer Name        | Item Hired      | Amount   | Receipt   
+=== Julie's Hire System Records (2026-07-01) ===
+Customer Name        | Item Hired      | Amount   | Receipt  
 -----------------------------------------------------------
-Matthew Mcleod | Plastic Chair   | 3        | 987654321 
+Andrew Hall          | Marquee Tent    | 500      | 967342

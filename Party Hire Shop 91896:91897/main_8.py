@@ -87,6 +87,9 @@ def submit():
 
             row = f"{full_name:<20} | {item:<15} | {new_amount:<8} | {new_num:<10}\n"
             file.write(row)
+        else: 
+            row = f"{full_name:<20} | {item:<15} | {new_amount:<8} | {new_num:<10}\n"
+            file.write(row)
 
     # Code for updating the customer return combobox
     return_name_combo['values'] = customer_names

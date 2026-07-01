@@ -99,7 +99,6 @@ def submit():
     hired_num.delete(0, tk.END)
 
 
-
 def returnitem():
     selected_customer = return_name_combo.get()
 

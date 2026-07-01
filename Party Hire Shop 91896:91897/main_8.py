@@ -6,6 +6,7 @@ from datetime import datetime
 
 #Program constants
 FILE_NAME = "hire_records.txt"
+RETURNED_FILE = "returned_records.txt"
 HIREABLE_ITEMS = ["Marquee Tent", "Plastic Chair", "Trestle Table", "Sound System", "Disco Lights"]
 HIRE_CAP = 500
 
@@ -130,11 +131,25 @@ def returnitem():
     
     updated_lines = []
     record_deleted = False
+    
+    return_file_exists = os.path.exists(RETURNED_FILE) and os.path.getsize(RETURNED_FILE) > 0 
 
     for line in lines:
         if selected_customer in line and not record_deleted:
             record_deleted = True
+            
+            with open(RETURNED_FILE, "a") as retrn_file:
+                if not return_file_exists:
+                    current_date = datetime.now().strftime("%Y-%m-^%d")
+                    retrn_file.write(f"=== Julie's Returned Items Archive ({current_date}) ===\n")
+                    header = f"{'Customer Name':<20} | {'Item Hired':<15} | {'Amount':<8} | {'Receipt':<10}\n"
+                    retrn_file.write(header)
+                    retrn_file.write("-" * len(header.strip()) + "\n")
+                    return_file_exists = True
+
+                retrn_file.write(line)
             continue
+        
         updated_lines.append(line)
 
     with open(FILE_NAME, "w") as file:

@@ -149,12 +149,14 @@ def returnitem():
 
                 retrn_file.write(line)
             continue
-        
+
         updated_lines.append(line)
 
     with open(FILE_NAME, "w") as file:
         file.writelines(updated_lines)
     
+    return_name_combo['values'] = list(customer_names)
+
     messagebox.showinfo("Success", f"All item successfully returned. Record for {selected_customer} has been deleted.")
     return_name_combo.set('')
 

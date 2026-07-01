@@ -1,4 +1,6 @@
 === Julie's Returned Items Archive (2026-07-^01) ===
 Customer Name        | Item Hired      | Amount   | Receipt   
 -----------------------------------------------------------
-matthew Mcleod       | Marquee Tent    | 54       | 5437092   
+Kevin Barnard        | Plastic Chair   | 32       | 1234567890
+Henry Harper         | Sound System    | 3        | 5839204   
+MAtht sdfsfd         | Disco Lights    | 34       | 324       
